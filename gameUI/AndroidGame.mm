@@ -306,7 +306,7 @@
                     sendMouseTouch(num*256+5, 3, 0, buttonXy[0][0], buttonXy[1][0], 1, buttonXy[1][0], buttonXy[1][1], 2,buttonXy[2][0], buttonXy[2][1], single.cur_tvInfo.tv_ip);
                 }
                 
-            NSLog(@"tvx = %f tvy = %f ",buttonXy[0][0],buttonXy[0][1]);
+            NSLog(@"tvx = %f tvy = %f                        ",buttonXy[0][0],buttonXy[0][1]);
             
 
             }else if((!CGRectContainsPoint(imageview[i].frame, [g_point[i] locationInView:self.view])) && g_point[i].phase == 1)
