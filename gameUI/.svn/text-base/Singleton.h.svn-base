@@ -1,0 +1,82 @@
+//
+//  Delegate.h
+//  gameUI
+//
+//  Created by xubo on 6/5 星期四.
+//  Copyright (c) 2014年 yibin chen. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
+#import "StartUI.h"
+#import "TvInfo.h"
+@interface Singleton : NSObject
+{
+    id<StartUI> delegate1 ;
+    
+    NSString *game_str;
+    int game_type;
+    int game_direction;
+    
+    NSMutableArray *ip_array ;
+    
+    NSTimer *timer;
+    
+    BOOL conn_withTv;       //手机与tv断开连接
+    BOOL flag;
+    NSNumber *row;
+    
+    NSNumber *Game_ID;
+    
+    BOOL vibrate_flag;
+    BOOL sound_flag;
+    BOOL frame_flag;
+    BOOL vibrate_flag2;
+    BOOL sound_flag2;
+    
+    int pNum;
+    
+    
+    TvInfo *cur_tvInfo;
+}
+@property int pNum;
+@property BOOL vibrate_flag2;
+@property BOOL sound_flag2;
+@property BOOL vibrate_flag;
+@property BOOL sound_flag;
+@property BOOL frame_flag;
+@property (readwrite) int game_direction;
+@property (readwrite) int game_type;
+@property (retain, nonatomic) NSString *game_str;
+@property (retain, nonatomic) TvInfo *cur_tvInfo;
+@property (retain, nonatomic) NSNumber *row;
+@property (retain, nonatomic) NSNumber *Game_ID;
+
+@property BOOL flag;
+@property BOOL conn_withTv;
+
++ (Singleton*) getInstance;
+- (void) initWithData;
+//游戏启动画面
+- (void) gameStart:(NSString*) gameId
+              type:(int) gameType
+         direction:(int) gameDirection;
+
+//显示tvInfo
+- (void) tvInfo:(NSString*)info
+        address:(int)ip;
+//显示tv上已经安装的游戏
+- (void) haveInstalledGameArrayInfo:(NSString*)str;
+
+- (void) dealloc;
+
+- (void) check;
+
+- (void) connStatue:(int)ip
+               conn:(int)isConnected
+              count:(int)num;
+- (void) getStart:(NSString*)string
+             type:(int)gameType
+        direction:(int)gameDirection;
+@property (retain, nonatomic) id<StartUI> delegate1;
+@property (retain, nonatomic) NSMutableArray *ip_array;
+@end

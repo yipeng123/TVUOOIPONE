@@ -1,0 +1,750 @@
+//
+//  myXYZViewController.m
+//  gameUI
+//
+//  Created by yibin chen on 14-05-20.
+//  Copyright (c) 2014年 yibin chen. All rights reserved.
+//
+
+#import "myXYZViewController.h"
+#import <UIKit/NSLayoutConstraint.h>
+#define degreesToRadians(x) (M_PI*(x)/180.0)
+#define CENTER 160.0
+static CGFloat radian;
+static int g_time;
+BOOL g_touch = true;
+
+@interface myXYZViewController ()
+{
+    BOOL isAppear;
+    CGPoint startPoint;
+    
+}
+@end
+
+
+@implementation myXYZViewController
+@synthesize MoreBttonu;
+@synthesize progress;
+@synthesize lockerView;
+@synthesize lordView;
+@synthesize touVoice;
+@synthesize touFrame;
+@synthesize touShake;
+@synthesize buttonHelp;
+@synthesize buttonOpinion;
+@synthesize buttonVersions;
+@synthesize labelImage; //标签图片          还没有使用
+@synthesize labelNTv;   //提示有几台电视标签
+@synthesize buttonConnect;
+@synthesize loadImage;      //封面
+@synthesize nameTV;
+@synthesize rotateImage;
+@synthesize rotateView;
+@synthesize rotaeLabel;
+@synthesize ClickremoteConncet;
+@synthesize nullMouseConncetButton; //空鼠连接设备按钮
+
+static BOOL loadImagelabel;
+
+@synthesize t_timer;
+
+-(void)free
+{
+    [MoreBttonu release];
+    [progress release];
+    [lockerView release];
+    [lordView release];
+    [touVoice release];
+    [touFrame release];
+    [touShake release];
+    [buttonHelp release];
+    [buttonOpinion release];
+    [buttonVersions release];
+    
+    [labelImage release];
+    [labelNTv release];
+    [buttonConnect release];
+    
+    [loadImage release];
+    [nameTV release];
+    [rotateImage release];
+    [rotateView release];
+    [rotaeLabel release];
+    [ClickremoteConncet release];
+    [t_timer invalidate];
+    [t_timer release];
+    [_remoteShutButton release];
+    [_remoteVoiceButton release];
+    [_remoteMinButton release];
+    [_remoteMaxButton release];
+    [_closeView release];
+    [nullMouseConncetButton release];
+   // [super dealloc];
+
+
+}
+
+
+- (void)dealloc
+{
+    [settings release];
+    [MoreBttonu release];
+    [progress release];
+    [lockerView release];
+    [lordView release];
+    [touVoice release];
+    [touFrame release];
+    [touShake release];
+    [buttonHelp release];
+    [buttonOpinion release];
+    [buttonVersions release];
+    
+    [labelImage release];
+    [labelNTv release];
+    [buttonConnect release];
+    
+    [loadImage release];
+    [nameTV release];
+    [rotateImage release];
+    [rotateView release];
+    [rotaeLabel release];
+    [ClickremoteConncet release];
+    [t_timer invalidate];
+    [t_timer release];
+    [_remoteShutButton release];
+    [_remoteVoiceButton release];
+    [_remoteMinButton release];
+    [_remoteMaxButton release];
+    [_closeView release];
+    [nullMouseConncetButton release];
+    [super dealloc];
+}
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        // Custom initialization
+    }
+    return self;
+}
+
+-(void) timerChanged:(id)sender         
+{
+        
+    
+    if(true == single.flag&&single.conn_withTv == TRUE)
+    {
+        [buttonConnect setTitle:@"断开连接" forState: UIControlStateNormal];
+        
+        labelImage.image = [UIImage imageNamed:@"zy_cg.png"];
+        
+        TvInfo *tv = [_tvInfos objectAtIndex:[single.row intValue]];
+        nameTV.text = tv.name;
+        labelNTv.text =  @"已连接设备";
+        progress.alpha = 0;
+        [ClickremoteConncet setTitle:@"已连接设备" forState: UIControlStateNormal];
+        [nullMouseConncetButton setTitle:@"已连接设备" forState: UIControlStateNormal];
+        
+        [t_timer invalidate];
+        t_timer = NULL;
+    }else if(0 != [_tvInfos count] )
+    {
+        int countTV = [_tvInfos count];
+        progress.alpha = 0;
+        labelNTv.text =  [NSString stringWithFormat:@"当前有%d台设备",countTV];
+        [buttonConnect setTitle:@"连接设备" forState: UIControlStateNormal];
+        labelImage.image = [UIImage imageNamed:@"zy_lj.png"];
+        nameTV.text = @"";
+        
+        if(false == single.flag)
+        {
+            [ClickremoteConncet setTitle:@"未连接设备" forState: UIControlStateNormal];          
+            [nullMouseConncetButton setTitle:@"未连接设备" forState: UIControlStateNormal];
+            
+        }
+        
+    }
+
+    if(self.progress.progress==1.0)
+    {
+        
+        self.progress.progress=0.0;
+        loadImagelabel = true;
+        [self.loadImage setFrame:CGRectMake(320, 0, 320, 548)];
+    }
+    
+    if(loadImagelabel == true)
+    {
+        [self.loadImage setFrame:CGRectMake(320, 0, 320, 548)];
+    }
+    self.progress.progress+=0.03f;
+    self.buttonHelp.backgroundColor = [UIColor whiteColor];
+    self.buttonOpinion.backgroundColor = [UIColor whiteColor];
+    self.buttonVersions.backgroundColor = [UIColor whiteColor];
+    
+    [[self navigationController] setNavigationBarHidden:YES animated:YES];      //隐藏导航栏
+}
+
+
+- (void)viewDidLoad         //加载函数
+{
+    [super viewDidLoad];
+    single = [Singleton getInstance];
+    
+//    Singleton *delegate =  [Singleton getInstance];
+    _tvInfos = [[NSMutableArray alloc] init];
+    _tvInfos =  [single ip_array];
+    
+    
+    
+    [single setDelegate1:self];
+    m_label++;
+    if(m_label==1)
+    {
+        startThread();
+    }
+    [super viewDidLoad];
+    [[self navigationController] setNavigationBarHidden:YES animated:YES];      //隐藏导航栏
+    
+    //定时器初始化                                    时间0.5秒      对象自己            函数 timerChanged      用户信息为空      是否循环yes
+    t_timer = [NSTimer scheduledTimerWithTimeInterval:0.2f target:self selector:@selector(timerChanged:) userInfo:nil repeats:YES];
+    //[self.view addSubview:viewHelp];
+    
+
+//   if(single.sound_flag == TRUE)
+//   {
+//       [touVoice setImage:[UIImage imageNamed:@"kaiguan1.png"]];
+//   }
+//    if(single.vibrate_flag == TRUE)
+//    {
+//        [touShake setImage:[UIImage imageNamed:@"kaiguan1.png"]];
+//    }
+    
+    settings = [[Settings alloc] init];
+    NSArray *array = [settings readFromLocalFile];
+    if(array != nil)
+    {
+        BOOL f_sound = [[array objectAtIndex:0] boolValue];
+        BOOL f_vibrate = [[array objectAtIndex:1] boolValue];
+        BOOL f_frame = [[array objectAtIndex:2] boolValue];
+//        BOOL f_frame = YES;
+        if(f_sound == TRUE)
+        {
+            [touVoice setImage:[UIImage imageNamed:@"kaiguan1.png"]];
+        }
+        else
+        {
+            [touVoice setImage:[UIImage imageNamed:@"kaiguan2.png"]];
+        }
+        if(f_vibrate == TRUE)
+        {
+            [touShake setImage:[UIImage imageNamed:@"kaiguan1.png"]];
+        }
+        else
+        {
+            [touShake setImage:[UIImage imageNamed:@"kaiguan2.png"]];
+        }
+        if(f_frame == TRUE)
+        {
+            [touFrame setImage:[UIImage imageNamed:@"kaiguan1.png"]];
+        }
+        else
+        {
+            [touFrame setImage:[UIImage imageNamed:@"kaiguan2.png"]];
+        }
+    }
+}
+
+- (void) showTvInfo
+{
+    _tvInfos =  [[Singleton getInstance] ip_array];
+
+//    int countTV = [_tvInfos count];
+//
+//    if(true == single.flag)
+//    {
+//        [buttonConnect setTitle:@"断开连接" forState: UIControlStateNormal];
+//        
+//        labelImage.image = [UIImage imageNamed:@"zy_cg.png"];
+//
+//    }else if(0 != countTV )
+//    {
+//        progress.alpha = 0;
+//        labelNTv.text =  [NSString stringWithFormat:@"当前有%d台设备",countTV];
+//        [buttonConnect setTitle:@"连接设备" forState: UIControlStateNormal];
+//        labelImage.image = [UIImage imageNamed:@"zy_lj.png"];
+//    }
+//    
+
+}
+
+
+
+
+
+
+-(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    if(false == g_touch)
+    {
+        return;
+    }
+    
+}
+
+
+-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    if(false == g_touch)
+    {
+        return;
+    }
+
+    UITouch *touch = [touches anyObject];
+    CGPoint pt = [touch locationInView:self.view];
+    UIImageView * remote=(UIImageView *)[self.view viewWithTag:12];
+    
+    
+    UIImageView *vacancy1 =(UIImageView*)[self.view viewWithTag:13];
+//    UIImageView *vacancy2 =(UIImageView*)[self.view viewWithTag:14];
+    
+    if(CGRectContainsPoint([vacancy1 frame], pt))
+    {
+        [vacancy1 setImage:[UIImage imageNamed:@"ks_shubiao2.png"]];
+        
+    }
+    
+
+    CGRect top = remote.frame;
+    CGRect down = remote.frame;
+    CGRect left = remote.frame;
+    CGRect right = remote.frame;
+    CGRect centre = remote.frame;
+    
+    top.size.height=top.size.height/4;
+    down.size.height=down.size.height/4;
+    down.origin.y+=down.size.height*3;
+    left.size.width=left.size.width/4;
+    right.size.width=right.size.width/4;
+    right.origin.x+=right.size.width*3;         
+    centre.size.height=centre.size.height/2;
+    centre.size.width=centre.size.width/2;
+    centre.origin.x+=60;
+    centre.origin.y+=60;
+    
+    TvInfo *tv = [_tvInfos objectAtIndex:[single.row intValue]];
+//    NSLog(@"%@----------------", tv.tag);
+    
+    if(CGRectContainsPoint(top , pt))
+    {
+        sendPSPEvent(0, "1001", 0, tv.tv_ip);
+//        sendPSPEvent(1, "1001", 0, tv.tv_ip);
+        [remote setImage:[UIImage imageNamed:@"sjyk_6.png"]];
+    }else if(CGRectContainsPoint(down,pt))
+    {
+        sendPSPEvent(0, "1002", 0, tv.tv_ip);
+//        sendPSPEvent(1, "1002", 0, tv.tv_ip);
+        [remote setImage:[UIImage imageNamed:@"sjyk_4.png"]];
+    }else if(CGRectContainsPoint(left,pt))
+    {
+        
+        sendPSPEvent(0, "1003", 0, tv.tv_ip);
+//        sendPSPEvent(1, "1003", 0, tv.tv_ip);
+        
+        [remote setImage:[UIImage imageNamed:@"sjyk_3.png"]];
+    }else if(CGRectContainsPoint(right,pt))
+    {
+        sendPSPEvent(0, "1004", 0, tv.tv_ip);
+//        sendPSPEvent(1, "1004", 0, tv.tv_ip);
+        [remote setImage:[UIImage imageNamed:@"sjyk_5.png"]];
+    }else if(CGRectContainsPoint(centre,pt))
+    {
+        sendPSPEvent(0, "1006", 0, tv.tv_ip);
+//        sendPSPEvent(1, "1006", 0, tv.tv_ip);
+        [remote setImage:[UIImage imageNamed:@"sjyk_2.png"]];
+    }
+    
+
+     [self lockerViewMonitor:touch];
+    startPoint = [touch locationInView:self.lordView];
+}
+
+-(void)lockerViewMonitor:(UITouch *)touch           //对抽屉进行监听
+{
+    CGPoint pt = [touch locationInView:self.view];
+    CGRect  frame =lordView.frame;
+    frame.size.width=frame.size.width/4;
+
+    if(CGRectContainsPoint(frame , pt))
+    {
+        [UIView animateWithDuration:0.5 animations:^{
+            
+            [self.lockerView setFrame:CGRectMake(320, 0, 320, 548)];
+        }];
+    }
+    
+    frame = touVoice.frame;
+    frame.size.width=touVoice.frame.size.width/2;
+    frame.origin.x+=touVoice.frame.size.width*1.8;
+    
+    if(CGRectContainsPoint(frame, pt))
+    {
+        //打开声音
+        single.sound_flag = TRUE;
+        [touVoice setImage:[UIImage imageNamed:@"kaiguan1.png"]];       //声音
+    }
+    
+    frame = touVoice.frame;
+    frame.size.width=touVoice.frame.size.width/2;
+    frame.origin.x+=touVoice.frame.size.width/4*5+5;
+    if(CGRectContainsPoint(frame, pt))
+    {
+        single.sound_flag = FALSE;
+        [touVoice setImage:[UIImage imageNamed:@"kaiguan2.png"]];
+    }
+
+    frame = touShake.frame;
+    frame.size.width=touShake.frame.size.width/2;
+    frame.origin.x+=touShake.frame.size.width*1.8;
+    if(CGRectContainsPoint(frame, pt))
+    {
+        single.vibrate_flag = TRUE;
+        [touShake setImage:[UIImage imageNamed:@"kaiguan1.png"]];       //震动
+        
+    }
+    
+    frame = touShake.frame;
+    frame.size.width=touShake.frame.size.width/2;
+    frame.origin.x+=touShake.frame.size.width/4*5+5;
+    if(CGRectContainsPoint(frame, pt))
+    {
+        single.vibrate_flag = FALSE;
+        [touShake setImage:[UIImage imageNamed:@"kaiguan2.png"]];
+    }
+    
+    frame = touFrame.frame;
+    frame.size.width=touFrame.frame.size.width/2;
+    frame.origin.x+=touFrame.frame.size.width*1.8;
+    if(CGRectContainsPoint(frame, pt))
+    {
+        single.frame_flag = TRUE;
+        [touFrame setImage:[UIImage imageNamed:@"kaiguan1.png"]];       //边界
+    }
+    
+    frame = touFrame.frame;
+    frame.size.width=touFrame.frame.size.width/2;
+    frame.origin.x+=touFrame.frame.size.width/4*5+5;
+    if(CGRectContainsPoint(frame, pt))
+    {
+        single.frame_flag = FALSE;
+        [touFrame setImage:[UIImage imageNamed:@"kaiguan2.png"]];
+    }
+    [settings writeToLocalFile];
+
+
+}
+
+
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+    //UITouch *touch = [touches anyObject];
+    if(false == g_touch)
+    {
+        return;
+    }
+    
+    UIImageView * remote=(UIImageView *)[self.view viewWithTag:12];
+    UIImageView *vacancy1 =(UIImageView*)[self.view viewWithTag:13];
+    
+     TvInfo *tv = [_tvInfos objectAtIndex:[single.row intValue]];
+    
+    sendPSPEvent(1, "1001", 0, tv.tv_ip);
+    sendPSPEvent(1, "1002", 0, tv.tv_ip);
+    sendPSPEvent(1, "1003", 0, tv.tv_ip);
+    sendPSPEvent(1, "1004", 0, tv.tv_ip);
+    sendPSPEvent(1, "1006", 0, tv.tv_ip);
+    
+    [vacancy1 setImage:[UIImage imageNamed:@"ks_shubiao.png"]];
+    [remote setImage:[UIImage imageNamed:@"sjyk_1.png"]];
+    self.buttonHelp.backgroundColor = [UIColor whiteColor];
+    self.buttonVersions.backgroundColor = [UIColor whiteColor];
+    self.buttonOpinion.backgroundColor = [UIColor whiteColor];
+
+    
+    UITouch *touch = [touches anyObject];
+    CGPoint point = [touch locationInView:self.lordView];     //获取在抽屉上移动的坐标
+    CGFloat dx = point.x - startPoint.x;      //获取移动后的坐标的X与触摸点X坐标的偏差
+    
+    CGPoint currentCenter = CGPointMake(self.lordView.center.x+dx,self.lordView.center.y);
+    
+    if (touch.tapCount !=0)
+    {
+        return;
+    }
+    else
+    {
+        if (isAppear)
+        {
+            [UIView animateWithDuration:0.5 animations:^{
+                
+                [self.lockerView setFrame:CGRectMake(320, 0, 320, 548)];
+            }];
+            isAppear = NO;
+        }
+        else if(currentCenter.x < CENTER)
+        {
+            [UIView animateWithDuration:0.5 animations:^{
+                
+                [self.lockerView setFrame:CGRectMake(80, 0, 320, 548)];
+            }];
+            isAppear = YES;
+        }
+    }
+
+}
+
+
+- (IBAction)packLocker:(id)sender {         //收起抽屉
+    
+    [UIView animateWithDuration:0.5 animations:^{
+        
+        [self.lockerView setFrame:CGRectMake(320, 0, 320, 548)];
+    }];
+
+}
+
+- (IBAction)ClickMoreBtton:(id)sender       //放出抽屉
+{
+    
+    [UIView animateWithDuration:0.5 animations:^{
+        
+        [self.lockerView setFrame:CGRectMake(80, 0, 320, 548)];
+    }];
+    
+}
+
+- (IBAction)ClickHelp:(id)sender {
+    self.buttonHelp.backgroundColor = [UIColor colorWithRed:110/255.0 green:123/255.0 blue:139/255.0 alpha:1.0];
+}
+- (IBAction)ClickOpinion:(id)sender {self.buttonOpinion.backgroundColor = [UIColor colorWithRed:110/255.0 green:123/255.0 blue:139/255.0 alpha:1.0];
+}
+
+- (IBAction)ClickVersions:(id)sender {self.buttonVersions.backgroundColor = [UIColor colorWithRed:110/255.0 green:123/255.0 blue:139/255.0 alpha:1.0];
+}
+//不支持转屏
+- (BOOL)shouldAutorotate{
+    return NO;
+}
+- (void)viewDidUnload {
+    [self setLabelImage:nil];
+    [self setLabelNTv:nil];
+    [self setButtonConnect:nil];
+    [self setLoadImage:nil];
+    [self setNameTV:nil];
+    [self setRotateImage:nil];
+    [self setRotateView:nil];
+    [self setRotaeLabel:nil];
+    [self setClickremoteConncet:nil];
+    [self setRemoteShutButton:nil];
+    [self setRemoteVoiceButton:nil];
+    [self setRemoteMinButton:nil];
+    [self setRemoteMaxButton:nil];
+    [self setCloseView:nil];
+    [self setNullMouseConncetButton:nil];
+    [self setT_timer:nil];
+    [super viewDidUnload];
+    
+}
+
+
+
+
+-(void) rotaeImage:(id)sender
+{
+    
+    
+    radian += 90*M_PI/180;
+    
+    [UIView animateWithDuration:0.1 animations:^{
+        
+        rotateImage.transform = CGAffineTransformMakeRotation(radian);
+        
+        
+    }];
+    
+    
+    if(20==++g_time)
+    {
+    [t_rotaeTime invalidate];
+    t_rotaeTime = nil;
+    [UIView animateWithDuration:0.1 animations:^{
+        
+        [self.rotateView setFrame:CGRectMake(320, 100, 260, 160)];
+        
+     }];
+    }
+}
+
+
+- (IBAction)ClickConnect:(id)sender {
+  
+    
+    g_time = 0;
+    if(true == single.flag&&single.conn_withTv == TRUE)
+     {
+         
+         rotaeLabel.text = @"正在与电视断开连接";
+         single.conn_withTv = FALSE;
+         single.flag = FALSE;
+         closeClient();
+         
+         startThread();
+         single.conn_withTv = TRUE;
+         
+         [UIView animateWithDuration:0.1 animations:^{
+             
+             [self.rotateView setFrame:CGRectMake(30, 100, 260, 160)];
+             
+         }];
+         t_rotaeTime = [NSTimer scheduledTimerWithTimeInterval:0.1f target:self selector:@selector(rotaeImage:) userInfo:nil repeats:YES];
+         
+     }else
+     {
+        [self performSegueWithIdentifier:@"aaa" sender:self];
+//         [t_timer invalidate];
+//         t_timer = nil;
+         
+     }
+}
+- (IBAction)ClickremoteConncetBtton:(id)sender {
+
+    [self performSegueWithIdentifier:@"bbb" sender:self];
+    [t_timer invalidate];
+    t_timer = nil;
+     [self free];
+}
+
+- (IBAction)ClickMyGame:(id)sender {
+    if(true == single.flag)
+    {
+        [self performSegueWithIdentifier:@"ddd" sender:self];
+        [t_timer invalidate];
+        t_timer = nil;
+         [self free];
+    }else
+    {
+        [self performSegueWithIdentifier:@"ccc" sender:self];
+        [t_timer invalidate];
+        t_timer = nil;
+         [self free];
+    }
+    
+}
+
+- (void) haveInstalledArrayInfo:(NSString *)games
+{
+
+}
+
+
+//关机 静音 减小 加大的按下松开事件
+- (IBAction)ClickremoteShutDown:(id)sender {
+    self.remoteShutButton.backgroundColor = [UIColor colorWithRed:110/255.0 green:123/255.0 blue:139/255.0 alpha:1.0];
+    
+    [UIView animateWithDuration:0.001 animations:^{
+        
+        [self.closeView setFrame:CGRectMake(0, 0, 320, 548)];
+    }];
+    
+    g_touch = false;
+}
+
+- (IBAction)ClickremoteShutUp:(id)sender {      self.remoteShutButton.backgroundColor = [UIColor colorWithRed:0.0 green:0.5 blue:0.0 alpha:1.0];
+    
+}
+
+- (IBAction)ClickremoteVoiceDown:(id)sender {   self.remoteVoiceButton.backgroundColor = [UIColor colorWithRed:110/255.0 green:123/255.0 blue:139/255.0 alpha:1.0];
+    TvInfo *tv = [_tvInfos objectAtIndex:[single.row intValue]];
+    sendPSPEvent(0, "2022", 0, tv.tv_ip);
+}
+
+- (IBAction)ClickremoteVoiceUp:(id)sender {     self.remoteVoiceButton.backgroundColor = [UIColor colorWithRed:0.0 green:0.5 blue:0.0 alpha:1.0];
+//    TvInfo *tv = [_tvInfos objectAtIndex:[single.row intValue]];
+//    sendPSPEvent(1, "2022", 0, tv.tv_ip);
+}
+
+- (IBAction)ClickremoteMinDown:(id)sender {     self.remoteMinButton.backgroundColor = [UIColor colorWithRed:110/255.0 green:123/255.0 blue:139/255.0 alpha:1.0];
+    TvInfo *tv = [_tvInfos objectAtIndex:[single.row intValue]];
+    sendPSPEvent(0, "2023", 0, tv.tv_ip);
+}
+
+- (IBAction)ClickremoteMinUp:(id)sender {        self.remoteMinButton.backgroundColor = [UIColor colorWithRed:0.0 green:0.5 blue:0.0 alpha:1.0];
+}
+
+- (IBAction)ClickremoteMaxDown:(id)sender {     self.remoteMaxButton.backgroundColor = [UIColor colorWithRed:110/255.0 green:123/255.0 blue:139/255.0 alpha:1.0];
+    TvInfo *tv = [_tvInfos objectAtIndex:[single.row intValue]];
+    sendPSPEvent(0, "2024", 0, tv.tv_ip);
+}
+
+- (IBAction)ClickremoteMaxUp:(id)sender {       self.remoteMaxButton.backgroundColor = [UIColor colorWithRed:0.0 green:0.5 blue:0.0 alpha:1.0];
+}
+
+//确定关闭 和 暂不关闭事件
+- (IBAction)ClickYesClose:(id)sender {
+    
+    [UIView animateWithDuration:0.001 animations:^{
+        
+        [self.closeView setFrame:CGRectMake(320, 0, 320, 548)];
+    }];
+    
+    g_touch = true;
+    TvInfo *tv = [_tvInfos objectAtIndex:[single.row intValue]];
+    sendPSPEvent(0, "2021", 0, tv.tv_ip);
+}
+
+- (IBAction)ClickNoClose:(id)sender {
+    
+    [UIView animateWithDuration:0.001 animations:^{
+        
+        [self.closeView setFrame:CGRectMake(320, 0, 320, 548)];
+    }];
+
+    g_touch = true;
+}
+- (IBAction)ClickReturn:(id)sender
+{
+    TvInfo *tvInfo = [_tvInfos objectAtIndex:[single.row intValue]];
+    sendPSPEvent(0, "2009", 0, tvInfo.tv_ip);
+    sendPSPEvent(1, "2009", 0, tvInfo.tv_ip);
+    NSLog(@"返回");
+}
+
+- (IBAction)ClickLord:(id)sender
+{
+    TvInfo *tvInfo = [_tvInfos objectAtIndex:[single.row intValue]];
+    sendPSPEvent(1, "2020", 0, tvInfo.tv_ip);
+    NSLog(@"主页");
+}
+
+- (IBAction)ClickMuen:(id)sender
+{
+    TvInfo *tvInfo = [_tvInfos objectAtIndex:[single.row intValue]];
+    sendPSPEvent(0, "2010", 0, tvInfo.tv_ip);
+    sendPSPEvent(1, "2010", 0, tvInfo.tv_ip);
+    NSLog(@"菜单");
+}
+
+- (IBAction)ClickGameCentre:(id)sender {
+    [t_timer invalidate];
+    t_timer = nil;
+     [self free];
+}
+- (IBAction)ClickTouch:(id)sender {
+//    [t_timer invalidate];
+//    t_timer = nil;
+//    //[self free];
+    
+}
+
+@end

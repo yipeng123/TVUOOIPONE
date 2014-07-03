@@ -1,0 +1,227 @@
+//
+//  connecTV.m
+//  gameUI
+//
+//  Created by yibin chen on 14-06-10.
+//  Copyright (c) 2014年 yibin chen. All rights reserved.
+//
+
+#import "connecTV.h"
+#import "MyJniTransport.h"
+
+@interface connecTV ()
+{
+    NSTimer * t_timer;
+    UIButton *but ;
+}
+@end
+
+@implementation connecTV
+
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        // Custom initialization
+    }
+    return self;
+}
+
+
+//设置table view的高度
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 80;
+}
+
+//设置分段的行数  只可以少 不可以多
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    int count = [_tvInfos count];
+    if(count==0){
+        return 1;
+    }
+    NSLog(@"本手机的mac地址是: %@", [DeviceInfo getMacAddress]);
+    return count;
+    //返回书的数量  告诉系统有几本这样的书
+}
+
+//返回的是table view cell 的内容   我们调用的每一个单元格
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSString * cellId=[[NSString alloc]initWithFormat:@"RecipeCell"];       //给创建的版本命名
+    
+    int nodeCount = [_tvInfos count];
+    
+	if (nodeCount == 0 && indexPath.row == 0)
+	{
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
+        if (cell == nil)
+		{
+            cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle
+										   reuseIdentifier:cellId] autorelease];
+            cell.detailTextLabel.textAlignment = UITextAlignmentCenter;
+			cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        }
+        
+		cell.detailTextLabel.text = [NSString stringWithFormat:@"正在查找设备..."];
+        
+		return cell; //记录为0则直接返回，只显示数据加载中…
+    }
+
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
+    if (cell == nil)
+	{
+        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle
+									   reuseIdentifier:cellId] autorelease];
+		cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    }
+    
+    if(nodeCount>0){
+       TvInfo* appRecord = [_tvInfos objectAtIndex:indexPath.row];
+        
+		cell.textLabel.text = appRecord.name;
+        char *str = parseIp(appRecord.tv_ip);
+        NSString *ipStr = [NSString stringWithFormat:@"%s", str];
+        cell.detailTextLabel.text = ipStr;
+        //[tableview setSeparatorColor:[UIColor redColor ]];  //设置分割线的颜色
+        //向下滑动,停止时加载图标  
+        but = [UIButton buttonWithType:UIButtonTypeCustom];
+        
+        but.frame = CGRectMake(cell.frame.origin.x+40,cell.frame.origin.y+50,60,25);
+        [but setTitle:@"连接设备" forState: UIControlStateNormal];
+        but.titleLabel.font = [UIFont systemFontOfSize: 13.0];
+        [but setTag:indexPath.row];
+        
+        //给button添加点击事件，action参数中写入事件执行方法
+        //[but addTarget:indexPath.row addTarget:self action:@selector(action:) forControlEvents:UIControlEventTouchUpInside];
+      
+        [but addTarget:self action:@selector(action:) forControlEvents:UIControlEventTouchUpInside];  
+        
+        [but setBackgroundImage:[UIImage imageNamed:@"sjyk_anniu1.9.png"] forState:UIControlStateNormal];
+        //在button的tag中添加你需要传递的参数，目前资料中只有这种方法
+        //你可以传入任意类型的参数
+        
+        cell.accessoryView = but;
+    }
+ 
+    return cell;
+    
+    
+}
+
+//回调函数
+- (void) startGame:(NSString*) gameId
+              type:(int)gameType
+         direction:(int)gameDirection
+{
+    printf("aaaaaaaaaaaaaaaa");
+}
+
+
+- (void) showTvInfo
+{
+    _tvInfos =  [[Singleton getInstance] ip_array];
+    [tableview reloadData];
+}
+- (void) connectStatue:(int)ip
+                isConn:(int)isConnected
+                   num:(int)count
+{
+    if(isConnected == 1)
+    {
+        //连接成功 
+       [self.navigationController popViewControllerAnimated:YES];
+        
+    }
+    else
+    {
+        printf("没有连接成功");
+    }
+}
+
+-(NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+   
+    
+    return indexPath;
+}
+
+
+
+- (void)viewWillAppear:(BOOL)animated {
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
+    
+    [super viewWillAppear:animated];
+}
+
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];//选中后的反显颜色即刻消失
+    
+}
+
+
+//-(NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath        //选中状态
+//{
+//    return indexPath;
+//}
+
+
+- (void) connectStatue:(int)ip
+                isConn:(int)isConnected
+                   num:(int)count
+{
+    
+}
+
+
+- (void)viewDidLoad
+{
+    
+    Singleton *delegate =  [Singleton getInstance];
+    _tvInfos = [[NSMutableArray alloc] init];
+    _tvInfos =  [delegate ip_array];
+    [super viewDidLoad];
+
+    
+    
+    tableview =(UITableView *) [self.view viewWithTag:990];
+
+    
+    [delegate setDelegate1:self];
+}
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+- (void)dealloc {
+    
+    [super dealloc];
+}
+- (void)viewDidUnload {
+ 
+    [super viewDidUnload];
+}
+
+-(void)action:(id)sender{
+    int i = [sender tag];
+     printf("单击按钮=%d",i);
+    Singleton *single = [Singleton getInstance];
+    TvInfo *tvinfo = [single.ip_array objectAtIndex:i];
+    
+    int port = [tvinfo.udpPort intValue];
+    
+    connectServer(port, tvinfo.tv_ip);
+    
+    
+}
+
+
+- (IBAction)returnLay:(id)sender {      [self.navigationController popViewControllerAnimated:YES];
+}
+@end

@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/toolbox/!svn/ver/1105/Tvuoo/TvuooConnectorV2/client_ios/trunk/gameUI/Cpp/jsoncpp/src/json
+END
+json_valueiterator.inl
+K 25
+svn:wc:ra_dav:version-url
+V 117
+/svn/toolbox/!svn/ver/1105/Tvuoo/TvuooConnectorV2/client_ios/trunk/gameUI/Cpp/jsoncpp/src/json/json_valueiterator.inl
+END
+json_batchallocator.h
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/svn/toolbox/!svn/ver/1105/Tvuoo/TvuooConnectorV2/client_ios/trunk/gameUI/Cpp/jsoncpp/src/json/json_batchallocator.h
+END
+json_internalmap.inl
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/svn/toolbox/!svn/ver/1105/Tvuoo/TvuooConnectorV2/client_ios/trunk/gameUI/Cpp/jsoncpp/src/json/json_internalmap.inl
+END
+json_internalarray.inl
+K 25
+svn:wc:ra_dav:version-url
+V 117
+/svn/toolbox/!svn/ver/1105/Tvuoo/TvuooConnectorV2/client_ios/trunk/gameUI/Cpp/jsoncpp/src/json/json_internalarray.inl
+END
+json_value.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/toolbox/!svn/ver/1105/Tvuoo/TvuooConnectorV2/client_ios/trunk/gameUI/Cpp/jsoncpp/src/json/json_value.cpp
+END
+json_writer.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svn/toolbox/!svn/ver/1105/Tvuoo/TvuooConnectorV2/client_ios/trunk/gameUI/Cpp/jsoncpp/src/json/json_writer.cpp
+END
+sconscript
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/toolbox/!svn/ver/1105/Tvuoo/TvuooConnectorV2/client_ios/trunk/gameUI/Cpp/jsoncpp/src/json/sconscript
+END
+json_reader.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svn/toolbox/!svn/ver/1105/Tvuoo/TvuooConnectorV2/client_ios/trunk/gameUI/Cpp/jsoncpp/src/json/json_reader.cpp
+END

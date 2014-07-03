@@ -1,0 +1,711 @@
+//
+//  HORViewController.m
+//  gameUI
+//
+//  Created by yibin chen on 14-05-27.
+//  Copyright (c) 2014年 yibin chen. All rights reserved.
+//
+
+#import "HORViewController.h"
+@interface HORViewController ()
+{
+    
+    float radioX;
+    float radioY;
+    BOOL label1 ;       //判断按钮是否按下
+    BOOL label2 ;
+    
+    
+    UIImageView * buttonA;
+    UIImageView * buttonB;
+    UIImageView * buttonC;
+    UIImageView * buttonD;
+    
+    CGPoint startPoint;
+    UIImageView *hand2 ;
+    UIImageView *mouse2 ;
+    UIImageView *hand1;
+    UIImageView *mouse1 ;
+    
+    CGRect top ;
+    CGRect down;
+    CGRect left ;
+    CGRect right ;
+    CGRect centre;
+    
+    
+    int direction ;
+    int g_i ;
+    CGPoint g_point;
+   
+}
+@end
+
+@implementation HORViewController
+@synthesize lockerView;
+@synthesize lockerButtonVibration;
+@synthesize lockerButtonVoice;
+@synthesize buttonAddVoice;
+@synthesize buttonCutVoice;
+@synthesize buttonMenu;
+@synthesize buttonOut;
+@synthesize buttonSystem;
+@synthesize buttonConncet;
+@synthesize buttonMouse;
+@synthesize single;
+
+
+
+- (void)dealloc
+{
+    [crank1 release];
+    [bottom1 release];
+    [_functionButton release];
+    [_gameButton release];
+    [_insertButton release];
+    [_gameButton release];
+    [_insertButton release];
+    [lockerView release];
+    [lockerButtonVibration release];
+    [lockerButtonVoice release];
+    [buttonAddVoice release];
+    [buttonCutVoice release];
+    [buttonSystem release];
+    [buttonMenu release];
+    [buttonOut release];
+    [buttonConncet release];
+    [single release];
+    [super dealloc];
+}
+
+
+-(void)setDirection: (int)dir
+{
+    
+    if(dir==direction)return;
+    
+    if(2 == direction)
+    {
+        sendPSPEvent(1, "2056", 0, single.cur_tvInfo.tv_ip);
+        
+        NSLog(@"dddddddd%d xia",direction);
+        
+        
+        
+    }else if(3 == direction)
+    {
+        sendPSPEvent(1, "2057", 0, single.cur_tvInfo.tv_ip);
+        
+        NSLog(@"dddddddd%d zuo",direction);
+        
+    }else if(4 == direction)
+    {
+        sendPSPEvent(1, "2058", 0, single.cur_tvInfo.tv_ip);
+        
+        NSLog(@"dddddddd%d you",direction);
+    }else if(1 == direction)
+    {
+        sendPSPEvent(1, "2055", 0, single.cur_tvInfo.tv_ip);
+        NSLog(@"dddddddd%d shang",direction);
+    }
+    
+    direction = dir;
+
+}
+
+
+
+
+-(void)touchesMoved:(NSSet *)touches
+          withEvent:(UIEvent *)event
+{
+    UITouch *touch = [touches anyObject];
+
+    CGPoint pt = [touch locationInView:self.view];
+
+    
+    g_point = [[[touches allObjects] objectAtIndex:g_i-1] locationInView:self.view];
+    
+    
+    
+    if(CGRectContainsPoint(bottom1.frame, pt))
+    {
+        CGPoint point = [touch locationInView:self.view];
+        CGRect frame = crank1.frame;
+        frame.origin = point;
+        
+        
+<<<<<<< .mine
+        
+        
+        
+        
+        
+        [UIView animateWithDuration:0.1f animations:^{
+           crank1.center = frame.origin;
+        }];
+        
+        
+        
+=======
+        crank1.center = pt;
+>>>>>>> .r1196
+        if(CGRectContainsPoint(top , pt))
+        {
+
+            
+//            [self setDirection:1];
+            
+            sendPSPEvent(0, "2055", 0, single.cur_tvInfo.tv_ip);
+            
+            
+            
+        }else if(CGRectContainsPoint(down,pt))
+        {
+      
+            
+//            [self setDirection:2];
+            
+            sendPSPEvent(0, "2056", 0, single.cur_tvInfo.tv_ip);
+        }else if(CGRectContainsPoint(left,pt))
+        {
+       
+            
+//            [self setDirection:3];
+            
+            sendPSPEvent(0, "2057", 0, single.cur_tvInfo.tv_ip);
+        }else if(CGRectContainsPoint(right,pt))
+        {
+//            [self setDirection:4];
+           
+            sendPSPEvent(0, "2058", 0, single.cur_tvInfo.tv_ip);
+        }else if(CGRectContainsPoint(centre,pt))
+        {
+            [self setDirection:0];
+            
+            //            crank1.center = bottom1.center;
+        }
+
+        
+    }
+    
+    
+    
+    if(CGRectContainsPoint([hand2 frame],pt))
+    {
+        CGPoint point = [touch  locationInView:self.view];
+        CGRect  frame = hand1.frame;
+        frame.origin = point;
+        
+        if(hand2.frame.origin.x+2>frame.origin.x||hand2.frame.origin.y+2>frame.origin.y||hand2.frame.size.width+hand2.frame.origin.x-35<frame.origin.x||hand2.frame.size.height+hand2.frame.origin.y-54<frame.origin.y)
+        {
+            return;
+        }
+        
+        hand1.frame = frame;
+        
+    }
+    
+    if(CGRectContainsPoint([mouse2 frame],pt))
+    {
+        CGPoint point = [touch  locationInView:self.view];
+        CGRect  frame =mouse1.frame;
+        frame.origin = point;
+        
+        if(mouse2.frame.origin.x+2>frame.origin.x||mouse2.frame.origin.y+2>frame.origin.y||mouse2.frame.size.width+mouse2.frame.origin.x-39<frame.origin.x||mouse2.frame.size.height+mouse2.frame.origin.y-46<frame.origin.y)
+        {
+            return;
+        }
+        
+        mouse1.frame = frame;
+      
+        
+        CGFloat dx =  frame.origin.x - startPoint.x;
+        CGFloat dy = frame.origin.y -startPoint.y;
+      
+        startPoint = CGPointMake(frame.origin.x, frame.origin.y);
+        if(single != nil)
+        {
+            sendMouseEvent(2, dx*radioX, dy*radioY, single.cur_tvInfo.tv_ip, [single.cur_tvInfo.udpPort intValue]);
+        }
+
+    }
+    
+    [self ABCDViewMonitor:touch];
+}
+
+
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    
+    UITouch *touch = [touches anyObject];
+    
+    CGPoint pt = [touch locationInView:self.view];
+    
+    
+   
+    
+    
+    
+    if(5 >  fabsf((int)g_point.x - (int)pt.x)  && 5 > fabsf((int)g_point.y == (int)pt.y))
+    {
+        //方向抬起
+        
+//        [self setDirection:0];
+        
+        
+        sendPSPEvent(0, "2055", 0, single.cur_tvInfo.tv_ip);
+        sendPSPEvent(0, "2056", 0, single.cur_tvInfo.tv_ip);
+        sendPSPEvent(0, "2057", 0, single.cur_tvInfo.tv_ip);
+        sendPSPEvent(0, "2058", 0, single.cur_tvInfo.tv_ip);
+        
+        
+        
+        
+        crank1.center = bottom1.center;
+    }
+<<<<<<< .mine
+    
+    
+    if(CGRectContainsPoint([buttonA frame] , pt))
+=======
+    
+    if(CGRectContainsPoint([buttonA frame] , pt))
+>>>>>>> .r1196
+    {
+       
+        sendPSPEvent(1, "2061", 0, single.cur_tvInfo.tv_ip);
+        
+        [buttonA setImage:[UIImage imageNamed:@"jieji_anx1.png"]];
+    }else if(CGRectContainsPoint([buttonB frame] , pt))
+    {
+        
+        sendPSPEvent(1, "2062", 0, single.cur_tvInfo.tv_ip);
+        [buttonB setImage:[UIImage imageNamed:@"jieji_any1.png"]];
+    }else if(CGRectContainsPoint([buttonC frame] , pt))
+    {
+        sendPSPEvent(1, "2060", 0, single.cur_tvInfo.tv_ip);
+        [buttonC setImage:[UIImage imageNamed:@"jieji_anb1.png"]];
+    }else if(CGRectContainsPoint([buttonD frame] , pt))
+    {
+        
+        [buttonD setImage:[UIImage imageNamed:@"jieji_ana1.png"]];
+        sendPSPEvent(1, "2059", 0, single.cur_tvInfo.tv_ip);
+    }
+    
+    
+}
+
+
+
+
+
+
+
+-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    
+    if( TRUE == single.flag )
+    {
+        [buttonConncet setTitle:@"已连接设备" forState: UIControlStateNormal];
+    }else
+    {
+        [buttonConncet setTitle:@"未连接设备" forState: UIControlStateNormal];
+    }
+    
+    UITouch *touch = [touches anyObject];
+    CGPoint pt = [touch locationInView:self.view];
+    
+        if(CGRectContainsPoint(crank1.frame, pt))
+        {
+            g_i = [touches count];
+        }
+    
+    
+    
+    
+    if(CGRectContainsPoint(bottom1.frame, pt))
+    {
+        crank1.center = pt;
+        
+            CGPoint point = [touch locationInView:self.view];
+            CGRect frame = crank1.frame;
+            frame.origin = point;
+            
+         
+            
+            crank1.center = frame.origin;
+            if(CGRectContainsPoint(top , pt))
+            {
+
+                sendPSPEvent(0, "2055", 0, single.cur_tvInfo.tv_ip);
+                
+            }else if(CGRectContainsPoint(down,pt))
+            {
+                
+                sendPSPEvent(0, "2056", 0, single.cur_tvInfo.tv_ip);
+            }else if(CGRectContainsPoint(left,pt))
+            {
+                
+                sendPSPEvent(0, "2057", 0, single.cur_tvInfo.tv_ip);
+            }else if(CGRectContainsPoint(right,pt))
+            {
+                
+                sendPSPEvent(0, "2058", 0, single.cur_tvInfo.tv_ip);
+            }
+            
+   
+        
+    }
+
+    
+    
+    
+    
+
+    if(CGRectContainsPoint([hand2 frame],pt))
+    {
+        CGPoint point = [touch  locationInView:self.view];
+        CGRect  frame = hand1.frame;
+        frame.origin = point;
+        
+        if(hand2.frame.origin.x+2>frame.origin.x||hand2.frame.origin.y+2>frame.origin.y||hand2.frame.size.width+hand2.frame.origin.x-35<frame.origin.x||hand2.frame.size.height+hand2.frame.origin.y-54<frame.origin.y)
+        {
+            return;
+        }
+
+        hand1.frame = frame;
+    }
+    
+    if(CGRectContainsPoint([mouse2 frame],pt))
+    {
+        CGPoint point = [touch  locationInView:self.view];
+        CGRect  frame =mouse1.frame;
+        frame.origin = point;
+  
+        if(mouse2.frame.origin.x+2>frame.origin.x||mouse2.frame.origin.y+2>frame.origin.y||mouse2.frame.size.width+mouse2.frame.origin.x-39<frame.origin.x||mouse2.frame.size.height+mouse2.frame.origin.y-46<frame.origin.y)
+        {
+            return;
+        }
+        
+        mouse1.frame = frame;
+
+    }
+
+    
+    
+    top = bottom1.frame;
+    down = bottom1.frame;
+    left = bottom1.frame;
+    right = bottom1.frame;
+    centre = bottom1.frame;
+    
+    top.size.height=top.size.height/4+25;
+    down.size.height=down.size.height/4;
+    down.origin.y+=down.size.height*3-25;
+    left.size.width=left.size.width/4+25;
+    right.size.width=right.size.width/4;
+    right.origin.x+=right.size.width*3-25;
+    centre.size.height=centre.size.height/2;
+    centre.size.width=centre.size.width/2;
+    centre.origin.x+=60;
+    centre.origin.y+=60;
+    
+    
+    [self lockerViewMonitor:touch];
+    [self ABCDViewMonitor:touch];
+    
+
+}
+
+-(void)ABCDViewMonitor:(UITouch *)touch{        //对ABCD 四个按钮进行监听
+
+    CGPoint pt = [touch locationInView:self.view];
+
+    if(CGRectContainsPoint([buttonA frame] , pt))
+    {
+        printf("单击了A(x)按钮");
+        sendPSPEvent(0, "2061", 0, single.cur_tvInfo.tv_ip);
+        
+        [buttonA setImage:[UIImage imageNamed:@"jieji_anx2.png"]];
+    }else if(CGRectContainsPoint([buttonB frame] , pt))
+    {
+        printf("单击了B(y)按钮");
+        sendPSPEvent(0, "2062", 0, single.cur_tvInfo.tv_ip);
+        [buttonB setImage:[UIImage imageNamed:@"jieji_any2.png"]];
+    }else if(CGRectContainsPoint([buttonC frame] , pt))
+    {
+        printf("单击了C按钮");
+        sendPSPEvent(0, "2060", 0, single.cur_tvInfo.tv_ip);
+        [buttonC setImage:[UIImage imageNamed:@"jieji_anb2.png"]];
+    }else if(CGRectContainsPoint([buttonD frame] , pt))
+    {
+        printf("单击了D按钮");
+        sendPSPEvent(0, "2059", 0, single.cur_tvInfo.tv_ip);
+        [buttonD setImage:[UIImage imageNamed:@"jieji_ana2.png"]];
+    }else
+    {
+        [buttonA setImage:[UIImage imageNamed:@"jieji_anx1.png"]];
+        [buttonB setImage:[UIImage imageNamed:@"jieji_any1.png"]];
+        [buttonC setImage:[UIImage imageNamed:@"jieji_anb1.png"]];
+        [buttonD setImage:[UIImage imageNamed:@"jieji_ana1.png"]];
+        
+        sendPSPEvent(1, "2059", 0, single.cur_tvInfo.tv_ip);
+        sendPSPEvent(1, "2060", 0, single.cur_tvInfo.tv_ip);
+        sendPSPEvent(1, "2061", 0, single.cur_tvInfo.tv_ip);
+        sendPSPEvent(1, "2062", 0, single.cur_tvInfo.tv_ip);
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+-(void)lockerViewMonitor:(UITouch *)touch           //对抽屉进行监听
+{
+    CGPoint pt = [touch locationInView:self.view];
+    CGRect  frame =self.view.frame;
+    frame.size.width=270;
+    
+    if(CGRectContainsPoint(frame , pt))
+    {
+        [UIView animateWithDuration:0.5 animations:^{
+            [self.lockerView setFrame:CGRectMake(568, 0, 568, 320)];
+            buttonA.alpha = 1;
+        }];
+    }
+
+    
+}
+
+
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+    }
+
+    return self;
+}
+
+//不支持转屏
+- (BOOL)shouldAutorotate{
+    return NO;
+}
+
+
+-(void)initWall
+{
+    buttonA = (UIImageView *)[self.view  viewWithTag:131];
+    buttonB = (UIImageView *)[self.view  viewWithTag:132];
+    buttonC = (UIImageView *)[self.view  viewWithTag:133];
+    buttonD = (UIImageView *)[self.view  viewWithTag:134];
+    crank1 = (UIImageView*)[self.view viewWithTag:120];        //街机游戏摇柄
+    bottom1 = (UIImageView *)[self.view viewWithTag:121];      //街机游戏底座
+    single = [Singleton getInstance];
+    
+    hand2 = (UIImageView*)[self.view  viewWithTag:10];
+    mouse2 = (UIImageView*)[self.view viewWithTag:11];
+    hand1 = (UIImageView*)[self.view  viewWithTag:100];
+    mouse1 = (UIImageView*)[self.view viewWithTag:101];
+    radioX =  [single.cur_tvInfo.winW floatValue]/mouse2.frame.size.width;
+    radioY =  [single.cur_tvInfo.winH floatValue]/mouse2.frame.size.height;
+
+
+    
+    
+}
+
+
+
+
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+
+
+    direction = 0;
+    
+    
+    //设置应用程序的状态栏到指定的方向
+    [[UIApplication sharedApplication] setStatusBarOrientation:UIInterfaceOrientationLandscapeRight];
+    //view旋转
+    [self.view setTransform:CGAffineTransformMakeRotation(M_PI/2)];
+    
+    self.view.multipleTouchEnabled =YES;        //设置可以接受多点事件
+    
+    
+    startPoint = mouse2.frame.origin;
+    
+    [self initWall];
+}
+
+
+
+
+
+
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    //隐藏navigationController
+    [self.navigationController setNavigationBarHidden:YES animated:NO];
+    //隐藏状态栏
+    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationSlide];}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    //显示状态栏
+    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationSlide];
+    //显示navigationController
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
+    
+}
+
+
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+
+
+
+
+
+
+
+- (void)viewDidUnload {
+    [self setFunctionButton:nil];
+    [self setGameButton:nil];
+    [self setInsertButton:nil];
+    [self setGameButton:nil];
+    [self setInsertButton:nil];
+    [self setLockerView:nil];
+    [self setLockerButtonVibration:nil];
+    [self setLockerButtonVibration:nil];
+    [self setLockerButtonVoice:nil];
+    [self setButtonAddVoice:nil];
+    [self setButtonCutVoice:nil];
+    [self setButtonSystem:nil];
+    [self setButtonMenu:nil];
+    [self setButtonOut:nil];
+    [self setButtonConncet:nil];
+    [self setSingle:nil];
+    [super viewDidUnload];
+}
+
+
+
+
+
+
+
+
+
+
+- (IBAction)clikeOut:(id)sender {   buttonOut.backgroundColor = [UIColor colorWithRed:110/255.0 green:123/255.0 blue:139/255.0 alpha:1.0];
+    
+}
+
+- (IBAction)clikeMenu:(id)sender {  buttonMenu.backgroundColor = [UIColor colorWithRed:110/255.0 green:123/255.0 blue:139/255.0 alpha:1.0];
+}
+
+- (IBAction)clikeSystem:(id)sender {    buttonSystem.backgroundColor = [UIColor colorWithRed:110/255.0 green:123/255.0 blue:139/255.0 alpha:1.0];
+}
+
+- (IBAction)clikeAddButtonUpOut:(id)sender {
+    buttonCutVoice.backgroundColor = [UIColor whiteColor];}
+
+- (IBAction)clikeCutButtonDown:(id)sender {
+    buttonCutVoice.backgroundColor = [UIColor colorWithRed:110/255.0 green:123/255.0 blue:139/255.0 alpha:1.0];
+}
+
+- (IBAction)deddd:(id)sender {
+    buttonAddVoice.backgroundColor = [UIColor whiteColor];
+}
+
+- (IBAction)clikeAddButtonDown:(id)sender {
+    buttonAddVoice.backgroundColor = [UIColor colorWithRed:110/255.0 green:123/255.0 blue:139/255.0 alpha:1.0];
+}
+
+- (IBAction)clikeFunction:(id)sender {
+    
+    
+    
+    [UIView animateWithDuration:0.5 animations:^{
+    [self.lockerView setFrame:CGRectMake(268, 0, 568, 320)];
+        buttonA.alpha = 0;
+}];
+}
+
+- (IBAction)clikeGame:(id)sender {
+    sendPSPEvent(0, "2066", 0, single.cur_tvInfo.tv_ip);
+    sendPSPEvent(1, "2066", 0, single.cur_tvInfo.tv_ip);
+}
+
+- (IBAction)clikeInsert:(id)sender {
+    sendPSPEvent(0, "2065", 0, single.cur_tvInfo.tv_ip);
+    sendPSPEvent(1, "2065", 0, single.cur_tvInfo.tv_ip);
+}
+- (IBAction)clikeVibration:(id)sender {     //震动单击
+ 
+    if(!label1)
+    {
+        [lockerButtonVibration setBackgroundImage:[UIImage imageNamed:@"kaiguan1.png"] forState:UIControlStateNormal];
+        label1 = YES;
+    }else
+    {
+        [lockerButtonVibration setBackgroundImage:[UIImage imageNamed:@"kaiguan2.png"] forState:UIControlStateNormal];
+        label1 = NO;
+    }
+    
+}
+
+- (IBAction)clikeVoice:(id)sender {
+  
+    if(!label2)
+    {
+        [lockerButtonVoice setBackgroundImage:[UIImage imageNamed:@"kaiguan1.png"] forState:UIControlStateNormal];
+        label2 = YES;
+    }else
+    {
+        [lockerButtonVoice setBackgroundImage:[UIImage imageNamed:@"kaiguan2.png"] forState:UIControlStateNormal];
+        label2 = NO;
+    }
+}
+
+
+
+- (IBAction)returnTop:(id)sender {   [self.navigationController popToRootViewControllerAnimated:YES];
+}
+
+- (IBAction)ClickNO:(id)sender
+{
+//    Singleton *single = [Singleton getInstance];
+    TvInfo *tvInfo = single.cur_tvInfo;
+    sendPSPEvent(0, "2009", 0, tvInfo.tv_ip);
+    sendPSPEvent(1, "2009", 0, tvInfo.tv_ip);
+    
+}
+
+- (IBAction)ClickOK:(id)sender
+{
+//    Singleton *single = [Singleton getInstance];
+    TvInfo *tvInfo = single.cur_tvInfo;
+    sendMouseEvent(0, 0, 0, tvInfo.tv_ip, [tvInfo.udpPort intValue]);
+    sendMouseEvent(3, 0, 0, tvInfo.tv_ip, [tvInfo.udpPort intValue]);
+}
+@end

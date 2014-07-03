@@ -1,0 +1,185 @@
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/toolbox/!svn/ver/1097/Tvuoo/TvuooConnectorV2/client_ios/trunk/CoreGraphics.framework/Headers
+END
+CGPDFContentStream.h
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/svn/toolbox/!svn/ver/1097/Tvuoo/TvuooConnectorV2/client_ios/trunk/CoreGraphics.framework/Headers/CGPDFContentStream.h
+END
+CGBitmapContext.h
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/svn/toolbox/!svn/ver/1097/Tvuoo/TvuooConnectorV2/client_ios/trunk/CoreGraphics.framework/Headers/CGBitmapContext.h
+END
+CGImage.h
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/toolbox/!svn/ver/1097/Tvuoo/TvuooConnectorV2/client_ios/trunk/CoreGraphics.framework/Headers/CGImage.h
+END
+CGPDFScanner.h
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/svn/toolbox/!svn/ver/1097/Tvuoo/TvuooConnectorV2/client_ios/trunk/CoreGraphics.framework/Headers/CGPDFScanner.h
+END
+CGContext.h
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/toolbox/!svn/ver/1097/Tvuoo/TvuooConnectorV2/client_ios/trunk/CoreGraphics.framework/Headers/CGContext.h
+END
+CGDataProvider.h
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/svn/toolbox/!svn/ver/1097/Tvuoo/TvuooConnectorV2/client_ios/trunk/CoreGraphics.framework/Headers/CGDataProvider.h
+END
+CGAffineTransform.h
+K 25
+svn:wc:ra_dav:version-url
+V 117
+/svn/toolbox/!svn/ver/1097/Tvuoo/TvuooConnectorV2/client_ios/trunk/CoreGraphics.framework/Headers/CGAffineTransform.h
+END
+CGFunction.h
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svn/toolbox/!svn/ver/1097/Tvuoo/TvuooConnectorV2/client_ios/trunk/CoreGraphics.framework/Headers/CGFunction.h
+END
+CGDataConsumer.h
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/svn/toolbox/!svn/ver/1097/Tvuoo/TvuooConnectorV2/client_ios/trunk/CoreGraphics.framework/Headers/CGDataConsumer.h
+END
+CGPDFStream.h
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/svn/toolbox/!svn/ver/1097/Tvuoo/TvuooConnectorV2/client_ios/trunk/CoreGraphics.framework/Headers/CGPDFStream.h
+END
+CGError.h
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/toolbox/!svn/ver/1097/Tvuoo/TvuooConnectorV2/client_ios/trunk/CoreGraphics.framework/Headers/CGError.h
+END
+CGColorSpace.h
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/svn/toolbox/!svn/ver/1097/Tvuoo/TvuooConnectorV2/client_ios/trunk/CoreGraphics.framework/Headers/CGColorSpace.h
+END
+CGGeometry.h
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svn/toolbox/!svn/ver/1097/Tvuoo/TvuooConnectorV2/client_ios/trunk/CoreGraphics.framework/Headers/CGGeometry.h
+END
+CGPath.h
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/toolbox/!svn/ver/1097/Tvuoo/TvuooConnectorV2/client_ios/trunk/CoreGraphics.framework/Headers/CGPath.h
+END
+CGGradient.h
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svn/toolbox/!svn/ver/1097/Tvuoo/TvuooConnectorV2/client_ios/trunk/CoreGraphics.framework/Headers/CGGradient.h
+END
+CGPDFOperatorTable.h
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/svn/toolbox/!svn/ver/1097/Tvuoo/TvuooConnectorV2/client_ios/trunk/CoreGraphics.framework/Headers/CGPDFOperatorTable.h
+END
+CoreGraphics.h
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/svn/toolbox/!svn/ver/1097/Tvuoo/TvuooConnectorV2/client_ios/trunk/CoreGraphics.framework/Headers/CoreGraphics.h
+END
+CGPDFDictionary.h
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/svn/toolbox/!svn/ver/1097/Tvuoo/TvuooConnectorV2/client_ios/trunk/CoreGraphics.framework/Headers/CGPDFDictionary.h
+END
+CGPDFString.h
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/svn/toolbox/!svn/ver/1097/Tvuoo/TvuooConnectorV2/client_ios/trunk/CoreGraphics.framework/Headers/CGPDFString.h
+END
+CGPDFObject.h
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/svn/toolbox/!svn/ver/1097/Tvuoo/TvuooConnectorV2/client_ios/trunk/CoreGraphics.framework/Headers/CGPDFObject.h
+END
+CGFont.h
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/toolbox/!svn/ver/1097/Tvuoo/TvuooConnectorV2/client_ios/trunk/CoreGraphics.framework/Headers/CGFont.h
+END
+CGPDFPage.h
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/toolbox/!svn/ver/1097/Tvuoo/TvuooConnectorV2/client_ios/trunk/CoreGraphics.framework/Headers/CGPDFPage.h
+END
+CGPDFArray.h
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svn/toolbox/!svn/ver/1097/Tvuoo/TvuooConnectorV2/client_ios/trunk/CoreGraphics.framework/Headers/CGPDFArray.h
+END
+CGPDFDocument.h
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/svn/toolbox/!svn/ver/1097/Tvuoo/TvuooConnectorV2/client_ios/trunk/CoreGraphics.framework/Headers/CGPDFDocument.h
+END
+CGBase.h
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/toolbox/!svn/ver/1097/Tvuoo/TvuooConnectorV2/client_ios/trunk/CoreGraphics.framework/Headers/CGBase.h
+END
+CGLayer.h
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/toolbox/!svn/ver/1097/Tvuoo/TvuooConnectorV2/client_ios/trunk/CoreGraphics.framework/Headers/CGLayer.h
+END
+CGPattern.h
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/toolbox/!svn/ver/1097/Tvuoo/TvuooConnectorV2/client_ios/trunk/CoreGraphics.framework/Headers/CGPattern.h
+END
+CGShading.h
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/toolbox/!svn/ver/1097/Tvuoo/TvuooConnectorV2/client_ios/trunk/CoreGraphics.framework/Headers/CGShading.h
+END
+CGColor.h
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/toolbox/!svn/ver/1097/Tvuoo/TvuooConnectorV2/client_ios/trunk/CoreGraphics.framework/Headers/CGColor.h
+END
+CGPDFContext.h
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/svn/toolbox/!svn/ver/1097/Tvuoo/TvuooConnectorV2/client_ios/trunk/CoreGraphics.framework/Headers/CGPDFContext.h
+END

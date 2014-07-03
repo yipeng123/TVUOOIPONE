@@ -1,0 +1,77 @@
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/toolbox/!svn/ver/1097/Tvuoo/TvuooConnectorV2/client_ios/trunk/CFNetwork.framework/Headers
+END
+CFHTTPMessage.h
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svn/toolbox/!svn/ver/1097/Tvuoo/TvuooConnectorV2/client_ios/trunk/CFNetwork.framework/Headers/CFHTTPMessage.h
+END
+CFSocketStream.h
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/svn/toolbox/!svn/ver/1097/Tvuoo/TvuooConnectorV2/client_ios/trunk/CFNetwork.framework/Headers/CFSocketStream.h
+END
+CFFTPStream.h
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svn/toolbox/!svn/ver/1097/Tvuoo/TvuooConnectorV2/client_ios/trunk/CFNetwork.framework/Headers/CFFTPStream.h
+END
+CFNetworkErrors.h
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/svn/toolbox/!svn/ver/1097/Tvuoo/TvuooConnectorV2/client_ios/trunk/CFNetwork.framework/Headers/CFNetworkErrors.h
+END
+CFNetwork.h
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/toolbox/!svn/ver/1097/Tvuoo/TvuooConnectorV2/client_ios/trunk/CFNetwork.framework/Headers/CFNetwork.h
+END
+CFNetServices.h
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svn/toolbox/!svn/ver/1097/Tvuoo/TvuooConnectorV2/client_ios/trunk/CFNetwork.framework/Headers/CFNetServices.h
+END
+CFHTTPStream.h
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/toolbox/!svn/ver/1097/Tvuoo/TvuooConnectorV2/client_ios/trunk/CFNetwork.framework/Headers/CFHTTPStream.h
+END
+CFNetworkDefs.h
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svn/toolbox/!svn/ver/1097/Tvuoo/TvuooConnectorV2/client_ios/trunk/CFNetwork.framework/Headers/CFNetworkDefs.h
+END
+CFHost.h
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/toolbox/!svn/ver/1097/Tvuoo/TvuooConnectorV2/client_ios/trunk/CFNetwork.framework/Headers/CFHost.h
+END
+CFNetDiagnostics.h
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/svn/toolbox/!svn/ver/1097/Tvuoo/TvuooConnectorV2/client_ios/trunk/CFNetwork.framework/Headers/CFNetDiagnostics.h
+END
+CFProxySupport.h
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/svn/toolbox/!svn/ver/1097/Tvuoo/TvuooConnectorV2/client_ios/trunk/CFNetwork.framework/Headers/CFProxySupport.h
+END
+CFHTTPAuthentication.h
+K 25
+svn:wc:ra_dav:version-url
+V 117
+/svn/toolbox/!svn/ver/1097/Tvuoo/TvuooConnectorV2/client_ios/trunk/CFNetwork.framework/Headers/CFHTTPAuthentication.h
+END

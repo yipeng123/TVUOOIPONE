@@ -1,0 +1,95 @@
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/toolbox/!svn/ver/1196/Tvuoo/TvuooConnectorV2/client_ios/trunk/gameUI/Cpp
+END
+TVUDevice.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/toolbox/!svn/ver/1105/Tvuoo/TvuooConnectorV2/client_ios/trunk/gameUI/Cpp/TVUDevice.cpp
+END
+TVUChannel.mm
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/toolbox/!svn/ver/1140/Tvuoo/TvuooConnectorV2/client_ios/trunk/gameUI/Cpp/TVUChannel.mm
+END
+TVUPackage.h
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/toolbox/!svn/ver/1105/Tvuoo/TvuooConnectorV2/client_ios/trunk/gameUI/Cpp/TVUPackage.h
+END
+Delegate.mm
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/toolbox/!svn/ver/1105/Tvuoo/TvuooConnectorV2/client_ios/trunk/gameUI/Cpp/Delegate.mm
+END
+TVUDevice.h
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/toolbox/!svn/ver/1105/Tvuoo/TvuooConnectorV2/client_ios/trunk/gameUI/Cpp/TVUDevice.h
+END
+TVUFirewall.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/toolbox/!svn/ver/1105/Tvuoo/TvuooConnectorV2/client_ios/trunk/gameUI/Cpp/TVUFirewall.cpp
+END
+MyJniTransport.h
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/toolbox/!svn/ver/1165/Tvuoo/TvuooConnectorV2/client_ios/trunk/gameUI/Cpp/MyJniTransport.h
+END
+TVUFirewall.h
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/toolbox/!svn/ver/1105/Tvuoo/TvuooConnectorV2/client_ios/trunk/gameUI/Cpp/TVUFirewall.h
+END
+TVUChannel.h
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/toolbox/!svn/ver/1105/Tvuoo/TvuooConnectorV2/client_ios/trunk/gameUI/Cpp/TVUChannel.h
+END
+TVUClient.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/toolbox/!svn/ver/1140/Tvuoo/TvuooConnectorV2/client_ios/trunk/gameUI/Cpp/TVUClient.cpp
+END
+TVUPhoneDevice.mm
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/toolbox/!svn/ver/1140/Tvuoo/TvuooConnectorV2/client_ios/trunk/gameUI/Cpp/TVUPhoneDevice.mm
+END
+TVUClient.h
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/toolbox/!svn/ver/1105/Tvuoo/TvuooConnectorV2/client_ios/trunk/gameUI/Cpp/TVUClient.h
+END
+TVUPackage.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/toolbox/!svn/ver/1105/Tvuoo/TvuooConnectorV2/client_ios/trunk/gameUI/Cpp/TVUPackage.cpp
+END
+MyJniTransport.mm
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/toolbox/!svn/ver/1196/Tvuoo/TvuooConnectorV2/client_ios/trunk/gameUI/Cpp/MyJniTransport.mm
+END
+TVUPhoneDevice.h
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/toolbox/!svn/ver/1105/Tvuoo/TvuooConnectorV2/client_ios/trunk/gameUI/Cpp/TVUPhoneDevice.h
+END
