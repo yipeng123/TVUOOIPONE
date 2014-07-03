@@ -89,6 +89,7 @@
 - (IBAction)OkHandDown:(id)sender;
 - (IBAction)OKHand:(id)sender;
 - (IBAction)NoHand:(id)sender;
+- (IBAction)NoHandDown:(id)sender;
 
 
 @end

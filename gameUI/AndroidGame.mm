@@ -610,15 +610,21 @@
     [self.navigationController popViewControllerAnimated:YES];   [appRecord release]; appRecord = NULL;
 }
 
-- (IBAction)OkHandDown:(id)sender { sendPSPEvent(0, "1006", 0, single.cur_tvInfo.tv_ip);
+- (IBAction)OkHandDown:(id)sender { 
 }
 
-- (IBAction)OKHand:(id)sender {  NSLog(@"单击确认");    sendPSPEvent(1, "1006", 0, single.cur_tvInfo.tv_ip);
+- (IBAction)OKHand:(id)sender {  NSLog(@"单击确认");   sendPSPEvent(0, "1006", 0, single.cur_tvInfo.tv_ip); sendPSPEvent(1, "1006", 0, single.cur_tvInfo.tv_ip);
     NSLog(@"%d gameInfo",single.cur_tvInfo.tv_ip);
 }
 
+
+
 - (IBAction)NoHand:(id)sender {  NSLog(@"单击回退");    sendPSPEvent(0, "2009", 0, single.cur_tvInfo.tv_ip);
     sendPSPEvent(1, "2009", 0, single.cur_tvInfo.tv_ip);
+}
+
+- (IBAction)NoHandDown:(id)sender {
+    
 }
 
 
